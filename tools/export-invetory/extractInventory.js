@@ -1,3 +1,6 @@
+/*
+ * PART 1 - start
+ */
 function injectLibraries(sources){
 	for( i = 0; i<sources.length; i++ ){
 		scriptNode = document.createElement('script');
@@ -12,14 +15,35 @@ var scripts = [
 ]
 
 injectLibraries(scripts);
+/*
+ * PART 1 - end
+ */
+
+/*
+ * PART 2 - start 
+ */
+csv = "item,qta\n";
+$('div.item').each( function (idx) {
+  str = $(this).find('h4').text();
+  str += ",";
+  str += $(this).find('b').text().replace(',','');
+  csv += str + "\n";
+})
+var myFile = new File([csv], "invetory.csv", {type: "text/plain;charset=utf-8"});
+saveAs(myFile);
+/*
+ * PART 2 - end
+ */
 
 function exportInvetoryAsCSV(){
+	/*
 	URL = "https://marvelstrikeforce.com/en/inventory/";
 	ref = window.location+"";
 	if (ref.startsWith(URL) == false || ref == URL ){
 		console.log("You can download the invetory from INVETORY page after that you LOG-IN");
 		return;
 	}
+	*/
 	csv = "item,qta\n";
 	$('div.item').each( function (idx) {
 	  str = $(this).find('h4').text();
