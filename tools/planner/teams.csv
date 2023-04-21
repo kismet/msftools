@@ -1,0 +1,28 @@
+Name,Id,StartLevel,StartGear,LevelGoal,GearGoal,1,2,3,4,5,6
+Wong,Wong,85,16,90,17,1,0,1,0,0,0
+Strange (Hearthless),StrangeSupreme,85,16,90,17,0,0,0,0,1,0
+Morgan Le Fay,MorganLeFay,90,17,90,17,0,0,0,0,0,0
+Agatha Harkness,AgathaHarkness,85,16,90,17,0,0,1,0,1,0
+Scarlet Witch,ScarletWitch,85,16,90,17,0,0,0,0,1,0
+,,,,,,,,,,,
+Abomination,Abomination,85,17,90,17,0,0,0,0,0,0
+Red Hulk,RedHulk,85,17,90,17,0,0,0,0,0,0
+She-Hulk,SheHulk,85,17,90,17,0,0,0,0,0,0
+Hulk,Hulk,85,17,90,17,1,0,0,1,0,0
+Brawn,AmadeusCho,85,17,90,17,0,0,0,0,0,0
+,,,17,,,,,,,,
+Rogue,Rogue,90,17,90,17,0,0,0,0,0,0
+Gambit,Gambit,85,17,90,17,0,0,0,0,0,0
+Fantomex,Fantomex,85,17,90,17,0,0,0,0,1,0
+Dazzler,Dazzler,85,17,90,17,0,0,0,0,1,0
+Sunfire,Sunfire,85,17,90,17,0,0,0,0,0,0
+,,,17,,,,,,,,
+Magneto,Magneto,85,17,90,17,0,0,0,0,0,0
+Psylocke,Psylocke,85,17,90,17,0,0,0,0,0,0
+Dark Beast,DarkBeast,85,17,90,17,1,0,0,1,1,0
+Archangel,Archangel,85,17,90,17,0,1,0,1,1,0
+Nemesis,Nemesis,85,17,90,17,0,0,0,0,0,0
+,,,17,,,,,,,,
+Deathpool,Deathpool,85,17,90,17,0,0,0,0,0,0
+Kestrel,Sybil,85,17,90,17,0,0,0,0,0,0
+Spider-Weaver,SpiderWeaver,85,17,90,17,0,0,0,0,0,0
