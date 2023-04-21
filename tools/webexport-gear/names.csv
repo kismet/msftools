@@ -1,0 +1,237 @@
+CommonName,InternalNameAbomination,Abomination
+Absorbing Man,AbsorbingMan
+Adam Warlock,AdamWarlock
+Agatha Harkness,AgathaHarkness
+Agent Venom,AgentVenom
+A.I.M. Infector,AimControl_Infect
+A.I.M. Monstrosity,AimDmg_Offense
+A.I.M. Assaulter,AimDmg_Speed
+A.I.M. Researcher,AimSupport_Heal
+A.I.M. Security,AimTank_Taunt
+Brawn,AmadeusCho
+America Chavez,AmericaChavez
+Anti-Venom,AntiVenom
+Ant-Man,AntMan
+Apocalypse,Apocalypse
+Archangel,Archangel
+Mordo,BaronMordo
+Beast,Beast
+Bishop,Bishop
+Black Bolt,BlackBolt
+Black Panther,BlackPanther
+Black Panther (1MM),BlackPantherBC
+Black Widow,BlackWidow
+Blob,Blob
+Bucky Barnes,BuckyBarnes
+Bullseye,Bullseye
+Cable,Cable
+Captain America,CaptainAmerica
+Captain America (WWII),CaptainAmericaWW2
+Captain Carter,CaptainCarter
+Captain Marvel,CaptainMarvel
+Carnage,Carnage
+Cloak,Cloak
+Colleen Wing,ColleenWing
+Colossus,Colossus
+Corvus Glaive,CorvusGlaive
+Agent Coulson,Coulson
+Crossbones,Crossbones
+Crystal,Crystal
+Cull Obsidian,CullObsidian
+Cyclops,Cyclops
+Dagger,Dagger
+Daredevil,Daredevil
+Dark Beast,DarkBeast
+Dazzler,Dazzler
+Deadpool,Deadpool
+Deathlok,Deathlok
+Deathpool,Deathpool
+Doctor Octopus,DoctorOctopus
+Doctor Strange,DoctorStrange
+Doctor Voodoo,DoctorVoodoo
+Domino,Domino
+Doctor Doom,Doom
+Dormammu,Dormammu
+Drax,Drax
+Ebony Maw,EbonyMaw
+Echo,Echo
+Electro,Electro
+Elektra,Elektra
+Elsa Bloodstone,ElsaBloodstone
+Emma Frost,EmmaFrost
+Falcon,Falcon
+Fantomex,Fantomex
+Firestar,Firestar
+Gambit,Gambit
+Gamora,Gamora
+Ghost,Ghost
+Ghost Rider,GhostRider
+Ghost-Spider,GhostSpider
+Graviton,Graviton
+Groot,Groot
+Hand Assassin,HandControl_HealBlock
+Hand Blademaster,HandDmg_Bonus
+Hand Archer,HandDmg_Unbuff
+Hand Sorceress,HandSupport_Heal
+Hand Sentry,HandTank_Stealth
+Hawkeye,Hawkeye
+Heimdall,Heimdall
+Hela,Hela
+Hulk,Hulk
+Hulkbuster,Hulkbuster
+Human Torch,HumanTorch
+Hydra Grenadier,HydraDmg_AoE
+Hydra Rifle Trooper,HydraDmg_Buff
+Hydra Sniper,HydraDmg_Single
+Hydra Scientist,HydraSupport_Heal
+Hydra Armored Guard,HydraTank_Taunt
+Iceman,Iceman
+Ikaris,Ikaris
+Invisible Woman,InvisibleWoman
+Iron Fist,IronFist
+Iron Fist (WWII),IronFistOrson
+Ironheart,Ironheart
+Iron Man,IronMan
+Mighty Thor,JaneThor
+Jessica Jones,JessicaJones
+Jubilee,Jubilee
+Juggernaut,Juggernaut
+Kang the Conqueror,KangTheConqueror
+Karnak,Karnak
+Kate Bishop,KateBishop
+Killmonger,Killmonger
+Kingpin,Kingpin
+Kitty Pryde,KittyPryde
+Korath the Pursuer,Korath
+Kree Noble,KreeControl_Assist
+Kree Cyborg,KreeDmg_Offense
+Kree Reaper,KreeDmg_Speed
+Kree Oracle,KreeSupport_HoT
+Kree Royal Guard,KreeTank_Counter
+Lady Deathstrike,LadyDeathstrike
+Loki,Loki
+Longshot,Longshot
+Luke Cage,LukeCage
+Madelyne Pryor,MadelynePryor
+Magik,Magik
+Magneto,Magneto
+Mantis,Mantis
+Maria Hill,MariaHill
+M'Baku,MBaku
+Mercenary Soldier,MercDmg_General
+Mercenary Sniper,MercDmg_Single
+Mercenary Lieutenant,MercSupport_Buffs
+Mercenary Riot Guard,MercTank_Debuff
+Minn-Erva,Minerva
+Misty Knight,MistyKnight
+Moondragon,Moondragon
+Moon Knight,MoonKnight
+Moonstone,Moonstone
+Morbius,Morbius
+Morgan Le Fay,MorganLeFay
+Mister Fantastic,MrFantastic
+Mister Negative,MrNegative
+Mister Sinister,MrSinister
+Ms. Marvel,MsMarvel
+Multiple Man,MultipleMan
+Mysterio,Mysterio
+Mystique,Mystique
+Nakia,Nakia
+Namor,Namor
+Nebula,Nebula
+Negasonic,Negasonic
+Nemesis,Nemesis
+Nick Fury,NickFury
+Nico Minoru,NicoMinoru
+Night Nurse,NightNurse
+Nobu,Nobu
+Okoye,Okoye
+Omega Red,OmegaRed
+Phoenix,Phoenix
+Phyla-Vell,PhylaVell
+Polaris,Polaris
+Proxima Midnight,ProximaMidnight
+Psylocke,Psylocke
+Punisher,Punisher
+Pyro,Pyro
+Quake,Quake
+Quicksilver,Quicksilver
+Ravager Boomer,RavagerDmg_AoE
+Ravager Stitcher,RavagerSupport_Heal
+Ravager Bruiser,RavagerTank_Taunt
+Red Guardian,RedGuardian
+Red Hulk,RedHulk
+Red Skull,RedSkull
+Rescue,Rescue
+Rhino,Rhino
+Rocket Raccoon,RocketRaccoon
+Rogue,Rogue
+Ronan the Accuser,Ronan
+Sabretooth,Sabretooth
+Captain America (Sam),SamWilson
+Scarlet Spider,ScarletSpider
+Scarlet Witch,ScarletWitch
+Scientist Supreme,ScientistSupreme
+Scream,Scream
+Sersi,Sersi
+Shang-Chi,ShangChi
+Sharon Carter,SharonCarter
+Shatterstar,Shatterstar
+She-Hulk,SheHulk
+S.H.I.E.L.D. Assault,ShieldDmg_AoE
+S.H.I.E.L.D. Trooper,ShieldDmg_Defense
+S.H.I.E.L.D. Medic,ShieldSupport_Heal
+S.H.I.E.L.D. Operative,ShieldSupport_Stealth
+S.H.I.E.L.D. Security,ShieldTank_Stun
+Shocker,Shocker
+Shuri,Shuri
+Sif,Sif
+Silver Samurai,SilverSamurai
+Silver Surfer,SilverSurfer
+Spider-Man,SpiderMan
+Spider-Man 2099,SpiderMan2099
+Spider-Man (Noir),SpiderManNoir
+Spider-Punk,SpiderPunk
+Spider-Weaver,SpiderWeaver
+Spider-Woman,SpiderWoman
+Squirrel Girl,SquirrelGirl
+Star-Lord,StarLord
+Stature,Stature
+Storm,Storm
+Strange (Heartless),StrangeSupreme
+Stryfe,Stryfe
+Sunfire,Sunfire
+Swarm,Swarm
+Kestrel,Sybil
+Spider-Man (Symbiote),SymbioteSpiderMan
+Taskmaster,Taskmaster
+Star-Lord (T'Challa),TChalla
+Thanos,Thanos
+The Thing,Thing
+Thor,Thor
+Titania,Titania
+Toad,Toad
+Green Goblin,UltGreenGoblin
+Ultimus,Ultimus
+Ultron,Ultron
+Spider-Man (Miles),UltSpiderMan
+Union Jack,UnionJack
+U.S. Agent,USAgent
+Valkyrie,Valkyrie
+Venom,Venom
+Vision,Vision
+Viv Vision,VivVision
+Vulture,Vulture
+War Machine,WarMachine
+Wasp,Wasp
+White Tiger,WhiteTiger
+Winter Soldier,WinterSoldier
+Wolverine,Wolverine
+Wong,Wong
+X-23,X23
+Yelena Belova,Yelena
+Yellowjacket,Yellowjacket
+Yondu,Yondu
+Yo-Yo,YoYo
+Baron Zemo,Zemo
+Iron Man (Zombie),ZombieIronMan
