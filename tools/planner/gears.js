@@ -50,7 +50,7 @@ function getRequiredGears(name, end, start, slots){
 	*/
 	var gears = new Map();
 	var pg;
-	pg = JSON.parse(fs.readFileSync('../data/'+name+'.js'));
+	pg = JSON.parse(fs.readFileSync('../../data/'+name+'.js'));
 	var builtItems = pg.data.gearTiers[start].slots;
 	var rank = start;
 	while(rank<end){
