@@ -145,7 +145,7 @@ function loadRequireItems(teams){
 			}else{
 				//console.log("Inspecting..."+JSON.stringify(v,null,2));
 				//console.log("Inspecting..."+JSON.stringify(c,null,2));
-				c.addNeededQuantity(v.quantity);
+				c.addNeededQuantity(v.actualNeededQuantity());
 				c.requiredBy.push(teams[i].Id);
 			}
 		});
