@@ -16,11 +16,56 @@ class GearInfo {
 }
 
 class EquipInfo {
+
+	constructor(name, qta){
+		if ( qta == null ){
+			qta = 1;
+		}
+		this.name = name;
+		this.quantity = qta;
+		this.needed = this.quantity;
+		this.requiredBy = [];
+		this.qtaUsedFromInvetory = 0;
+		this.qtaBuilt = 0;
+	}
+
+	actualNeededQuantity(){
+		return this.quantity;
+	}
+
+	originalNeededQuantity(){
+		return this.needed;
+	}
+
+	addNeededQuantity(n){
+		this.quantity += n;
+		this.needed += n;
+	}
+
+	useFromInvetory(n){
+		this.quantity-=n;
+		if(this.quantity<=0) this.quantity = 0;
+		this.qtaUsedFromInvetory += n;
+	}
+
+	buildEquip(n){
+		this.quantity-=n;
+		if(this.quantity<=0) this.quantity = 0;
+		this.qtaBuilt+=n;
+	}
+
 	name;
-	toFarm;
-	inInvetory;
-	toBuild;
+	quantity;
+	needed;
 	requiredBy;
+	qtaUsedFromInvetory;
+	qtaBuilt;
+
+	/*
+	toString(){
+		return JSON.stringify(this, null, 2);
+	}
+	*/
 }
 
 var dbGear = new Map();
@@ -44,7 +89,7 @@ function updatedGearDatabase(item){
 			}
 			x.requires.set(cur.item.name, cur.quantity);
 			updatedGearDatabase(cur.item);
-		}			
+		}
 	}else{
 		x.requires = null;
 	}
@@ -53,10 +98,7 @@ function updatedGearDatabase(item){
 
 function getRequiredGears(name, end, start, slots){
 	/*
-	console.log(name);
-	console.log(end);
-	console.log(start);
-	console.log(slots);
+	console.log([name,end,start,slots]);
 	*/
 	var gears = new Map();
 	var pg;
@@ -68,28 +110,15 @@ function getRequiredGears(name, end, start, slots){
 		for(i = 0;i < builtItems.length; i++){
 			if( rank == start && slots[i] != 0 )
 				continue;
-			
+
 			var k = builtItems[i].piece.name;
-			//console.log(k);
-			/*
-			var qta = gears.get(k);
-			if (qta == null){
-				gears.set(k,1);
-			}else{
-				qta++;
-				gears.set(k,qta);
-			}	
-			*/
 			var equip = gears.get(k);
 			if ( equip == null ){
-				equip = new EquipInfo();
-				equip.name = k;
-				equip.toFarm = 1;
-				equip.requiredBy = [ name ];
+				equip = new EquipInfo(k);
 				gears.set(k, equip);
-			} else {
-				equip.toFarm++;
-				equip.requiredBy.push( name );
+				equip.requiredBy.push(name);
+			}else{
+				equip.addNeededQuantity(1);
 			}
 			updatedGearDatabase(builtItems[i].piece);
 		}
@@ -101,7 +130,7 @@ function getRequiredGears(name, end, start, slots){
 function loadRequireItems(teams){
 	var i = 0;
 	for(i = 0; i<teams.length; i++){
-		if ( teams[i].Id == "" ) 
+		if ( teams[i].Id == "" )
 				continue;
 		var equipedSlots = [];
 		var j = 1;
@@ -114,7 +143,10 @@ function loadRequireItems(teams){
 			if( c == null ) {
 				requiredItems.set(k,v);
 			}else{
-				requiredItems.set(k, c + v );
+				//console.log("Inspecting..."+JSON.stringify(v,null,2));
+				//console.log("Inspecting..."+JSON.stringify(c,null,2));
+				c.addNeededQuantity(v.quantity);
+				c.requiredBy.push(teams[i].Id);
 			}
 		});
 	}
@@ -122,7 +154,7 @@ function loadRequireItems(teams){
 
 //console.log( await neatCsv(fs.readFileSync('teams.csv')));
 var teams;
-var invetory = new Map(); 
+var invetory = new Map();
 var data;
 data =  await neatCsv(fs.readFileSync('invetory.csv'));
 var i = 0;
@@ -137,45 +169,40 @@ for(i = 0; i < data.length; i++){
 }
 
 function subtractInvetory(items, invetory){
-	var computed = new Map(items);
 	items.forEach( (v,k,m) => {
+		//console.log( "Subcratring at ... \n" + JSON.stringify(v,null,2) );
 		var qta = invetory.get(k)
 		if ( qta != null ){
-			v.toFarm -= qta;
-			v.inInvetory = qta;
-			v.toBuild = v.toFarm - qta;
-		}else{
-			v.inInvetory = 0;
-			v.toBuild = v.toFarm;
+			v.useFromInvetory(qta);
 		}
-		computed.set(k, v);		
 	});
-	items.clear();
-	computed.forEach( (v,k,m) => {
-		items.set(k,v);
-	});	
 }
 
 function buildMissingItems(items,db){
 	var flag = false;
-	var computed = new Map();
 	items.forEach( (v,k,m) => {
 		var gear = db.get(k);
-		if ( v == 0 ) return;
+		//Check if there are any gear that is not built or part of my invetory
+		if ( v.actualNeededQuantity() <= 0 ) {
+			return;
+		}
+		//Check if the gear can be built
 		if ( gear.requires == null ){
-			computed.set(k,v);
 			return;
 		}
 		flag = true;
+		//If i reach this part means that the gear can be built so I have to
+		//calcualte the total item required for building it
 		gear.requires.forEach( (qta,name) => {
-			var cur = computed.get(name);
-			if ( cur == null ) cur = 0;
-			computed.set(name,qta*v + cur*1);
+			var equip = items.get(name);
+			if(equip == null){
+				equip = new EquipInfo(name, 0);
+				items.set(name, equip);
+			}
+			equip.addNeededQuantity(qta * v.actualNeededQuantity() );
+			equip.requiredBy.push(v.name);
+			v.buildEquip(v.actualNeededQuantity());
 		});
-	});	
-	items.clear();
-	computed.forEach( (v,k,m) => {
-		items.set(k,v);
 	});
 	return flag;
 }
@@ -188,22 +215,24 @@ loadRequireItems(teams);
 console.log("Current requirements...");
 console.log(requiredItems);
 var rootReached = false;
+var maxRun = 10;
 do{
 	console.log("Removing items from Inventory");
 	subtractInvetory(requiredItems, invetory);
-	console.log("Updated requirements...");
+	console.log("Updated requirements after checking invetory...");
 	console.log(requiredItems);
 	console.log("Calculating items to build...");
 	rootReached = !buildMissingItems(requiredItems,dbGear);
-	console.log("Updated requirements...");
+	console.log("Updated requirements after building non root gear...");
 	console.log(requiredItems);
-}while(rootReached == false);
+	maxRun--;
+}while(rootReached == false && maxRun > 0);
 
 var output = fs.createWriteStream("farming.csv");
-output.write("item,qta\n");
+output.write("item,qtaToFarm,qtaInInvetory,qtaBuilt,qtaOriginalyNeeded,UsedBy\n");
 requiredItems.forEach( (v,k,m) => {
 	if (v<=0) return;
-	output.write(k+','+v+"\n");
+	output.write(k+','+v.actualNeededQuantity()+','+v.qtaUsedFromInvetory+','+v.qtaBuilt+','+v.needed+','+"\n");
 });
 output.end();
 
