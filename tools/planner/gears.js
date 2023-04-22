@@ -15,6 +15,14 @@ class GearInfo {
 	gold;
 }
 
+class EquipInfo {
+	name;
+	toFarm;
+	inInvetory;
+	toBuild;
+	requiredBy;
+}
+
 var dbGear = new Map();
 var requiredItems = new Map();
 
@@ -63,6 +71,7 @@ function getRequiredGears(name, end, start, slots){
 			
 			var k = builtItems[i].piece.name;
 			//console.log(k);
+			/*
 			var qta = gears.get(k);
 			if (qta == null){
 				gears.set(k,1);
@@ -70,6 +79,18 @@ function getRequiredGears(name, end, start, slots){
 				qta++;
 				gears.set(k,qta);
 			}	
+			*/
+			var equip = gears.get(k);
+			if ( equip == null ){
+				equip = new EquipInfo();
+				equip.name = k;
+				equip.toFarm = 1;
+				equip.requiredBy = [ name ];
+				gears.set(k, equip);
+			} else {
+				equip.toFarm++;
+				equip.requiredBy.push( name );
+			}
 			updatedGearDatabase(builtItems[i].piece);
 		}
 		rank++;
@@ -120,12 +141,14 @@ function subtractInvetory(items, invetory){
 	items.forEach( (v,k,m) => {
 		var qta = invetory.get(k)
 		if ( qta != null ){
-			if ( v - qta > 0 ) {
-				computed.set(k, v - qta );
-			}else{
-				computed.set(k, 0);
-			}
+			v.toFarm -= qta;
+			v.inInvetory = qta;
+			v.toBuild = v.toFarm - qta;
+		}else{
+			v.inInvetory = 0;
+			v.toBuild = v.toFarm;
 		}
+		computed.set(k, v);		
 	});
 	items.clear();
 	computed.forEach( (v,k,m) => {
