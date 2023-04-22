@@ -15,13 +15,15 @@ var scripts = [
 ]
 
 injectLibraries(scripts);
+
+
 /*
  * PART 1 - end
  */
 
 /*
  * PART 2 - start 
- */
+ *
 csv = "item,qta\n";
 $('div.item').each( function (idx) {
   str = $(this).find('h4').text();
@@ -71,3 +73,10 @@ function exportNamesAsCSV(){
 	var myFile = new File([list], "names.csv", {type: "text/plain;charset=utf-8"});
 	saveAs(myFile);
 }
+
+x = document.createElement('div');
+x.innerHTML = '<button style="margin: 3px 5px;" class="blue-primary button"><div class="button-wrapper"><i class="fas fa-file-csv" style="margin-right: 4px;" aria-hidden="true"></i>Export to CSV</div></button>'
+x.addEventListener('click',exportInvetoryAsCSV);
+
+root = document.getElementsByClassName('player-inventory')[0];
+root.childNodes[0].appendChild(x);
