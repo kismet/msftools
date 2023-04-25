@@ -1,6 +1,3 @@
-/*
- * PART 1 - start
- */
 function injectLibraries(sources){
 	for( i = 0; i<sources.length; i++ ){
 		scriptNode = document.createElement('script');
@@ -16,26 +13,6 @@ var scripts = [
 
 injectLibraries(scripts);
 
-
-/*
- * PART 1 - end
- */
-
-/*
- * PART 2 - start 
- *
-csv = "item,qta\n";
-$('div.item').each( function (idx) {
-  str = $(this).find('h4').text();
-  str += ",";
-  str += $(this).find('b').text().replace(',','');
-  csv += str + "\n";
-})
-var myFile = new File([csv], "invetory.csv", {type: "text/plain;charset=utf-8"});
-saveAs(myFile);
-/*
- * PART 2 - end
- */
 
 function exportInvetoryAsCSV(){
 	/*
@@ -64,9 +41,9 @@ function exportNamesAsCSV(){
 		console.log("You can download the original names only from the page "+URL);
 		return;
 	}
-	list = "CommonName,InternalName"; 
-	$('tr td a').each( function(i) { 
-		list+=$(this).text().trim()+","; 
+	list = "CommonName,InternalName";
+	$('tr td a').each( function(i) {
+		list+=$(this).text().trim()+",";
 		list += this.href.split("/").pop()+"\n"
 	});
 
