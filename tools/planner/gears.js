@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 'use strict';
 
 //const fs = require('fs');
@@ -16,6 +14,13 @@ class GearInfo {
 }
 
 class EquipInfo {
+
+	name;
+	quantity;
+	needed;
+	requiredBy;
+	qtaUsedFromInvetory;
+	qtaBuilt;
 
 	constructor(name, qta){
 		if ( qta == null ){
@@ -43,6 +48,7 @@ class EquipInfo {
 	}
 
 	useFromInvetory(n){
+		console.log("Using "+this.name+" from inventory for "+n+" QTA");
 		this.quantity-=n;
 		if(this.quantity<=0) this.quantity = 0;
 		this.qtaUsedFromInvetory += n;
@@ -54,12 +60,6 @@ class EquipInfo {
 		this.qtaBuilt+=n;
 	}
 
-	name;
-	quantity;
-	needed;
-	requiredBy;
-	qtaUsedFromInvetory;
-	qtaBuilt;
 
 	/*
 	toString(){
@@ -170,16 +170,21 @@ for(i = 0; i < data.length; i++){
 
 function subtractInvetory(items, invetory){
 	items.forEach( (v,k,m) => {
+		var needed = v.actualNeededQuantity();
+		if( needed <= 0) 
+			return;
+
 		//console.log( "Subcratring at ... \n" + JSON.stringify(v,null,2) );
 		var qta = invetory.get(k)
 		if ( qta != null ){
-			v.useFromInvetory(qta);
+			v.useFromInvetory(Math.min(qta,needed));
 		}
 	});
 }
 
 function buildMissingItems(items,db){
 	var flag = false;
+	var addMe = new Map();
 	items.forEach( (v,k,m) => {
 		var gear = db.get(k);
 		//Check if there are any gear that is not built or part of my invetory
@@ -196,14 +201,22 @@ function buildMissingItems(items,db){
 		gear.requires.forEach( (qta,name) => {
 			var equip = items.get(name);
 			if(equip == null){
-				equip = new EquipInfo(name, 0);
-				items.set(name, equip);
+				equip = addMe.get(name);
+				if ( equip == null ) {
+					equip = new EquipInfo(name, 0);
+					addMe.set(name, equip);
+				}
 			}
 			equip.addNeededQuantity(qta * v.actualNeededQuantity() );
-			equip.requiredBy.push(v.name);
-			v.buildEquip(v.actualNeededQuantity());
+			equip.requiredBy.push(v.actualNeededQuantity()+"x "+v.name );
 		});
+
+		v.buildEquip(v.actualNeededQuantity());
 	});
+	addMe.forEach((item, k) => {
+		items.set(k, item);
+	});
+
 	return flag;
 }
 
@@ -231,8 +244,7 @@ do{
 var output = fs.createWriteStream("farming.csv");
 output.write("item,qtaToFarm,qtaInInvetory,qtaBuilt,qtaOriginalyNeeded,UsedBy\n");
 requiredItems.forEach( (v,k,m) => {
-	if (v<=0) return;
-	output.write(k+','+v.actualNeededQuantity()+','+v.qtaUsedFromInvetory+','+v.qtaBuilt+','+v.needed+','+"\n");
+	output.write(k+','+v.actualNeededQuantity()+','+v.qtaUsedFromInvetory+','+v.qtaBuilt+','+v.needed+','+v.requiredBy+"\n");
 });
 output.end();
 
