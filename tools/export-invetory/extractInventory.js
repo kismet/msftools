@@ -1,6 +1,3 @@
-/*
- * PART 1 - start
- */
 function injectLibraries(sources){
 	for( i = 0; i<sources.length; i++ ){
 		scriptNode = document.createElement('script');
