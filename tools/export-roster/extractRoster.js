@@ -150,13 +150,35 @@ function extractCharacterInfo(i, x){
   setStars(c,x);
   setLevel(c,x);
   console.log(c);
+	toons.push(c);
   return c;
 }
 
+
+var toons = [];
 function exportRoster() {
-  $('li.character').each(extractCharacterInfo);
+	toons = [];
+  $('div.hero-list li.character').each(extractCharacterInfo);
+	exportRosterAsCSV();
+
 }
 
+function exportRosterAsCSV() {
+	csv = "name,power,level,gear,basic,special,ultimate,passive,";
+	csv += "iso_class,iso_level,gear_tl,gear_cl,gear_bl,gear_br,gear_cr,gear_tr\n";
+	toons.map( function(c) {
+		var str = '';
+		str += c.name+","+c.power+","+c.level+","+c.gear+","+c.skills.join(",")+","+c.iso.class+","
+		if(c.iso.color == "green") str+= "1."+c.iso.level+",";
+		if(c.iso.color == "blue") str+= "2."+c.iso.level+",";
+		str += c.slots.join(",");
+		console.log(str);
+
+		csv += str + "\n";
+	});
+	var myFile = new File([csv], "roster.csv", {type: "text/plain;charset=utf-8"});
+	saveAs(myFile);
+}
 
 x = document.createElement('div');
 x.innerHTML = '<button style="margin: 3px 5px;" class="blue-primary button"><div class="button-wrapper"><i class="fas fa-file-csv" style="margin-right: 4px;" aria-hidden="true"></i>Export to CSV</div></button>'
