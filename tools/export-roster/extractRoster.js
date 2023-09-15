@@ -6,11 +6,6 @@ function injectLibraries(sources){
 	}
 }
 
-var scripts = [
-	"//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",
-	"https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"
-];
-
 class ISOInfo {
   color;
   class;
@@ -28,9 +23,6 @@ class CharacterInfo {
   name;
   power;
 }
-
-injectLibraries(scripts);
-
 
 function setPower(c,x){
   parts = $(x).find('#toon-stats div');
@@ -179,10 +171,56 @@ function exportRosterAsCSV() {
 	var myFile = new File([csv], "roster.csv", {type: "text/plain;charset=utf-8"});
 	saveAs(myFile);
 }
+function addRosterButton(){
+	console.log("Creating Roster Export Button");
+	x = document.createElement('div');
+	var html = '<button id="x-msftools-roster" style="margin: 3px 5px;" class="blue-primary button">';
+	html +='<div class="button-wrapper"><i class="fas fa-file-csv" style="margin-right: 4px;" aria-hidden="true"></i>Export to CSV</div>';
+	html +='</button>';
+	x.innerHTML = html;
+	x.addEventListener('click',exportRoster);
 
-x = document.createElement('div');
-x.innerHTML = '<button style="margin: 3px 5px;" class="blue-primary button"><div class="button-wrapper"><i class="fas fa-file-csv" style="margin-right: 4px;" aria-hidden="true"></i>Export to CSV</div></button>'
-x.addEventListener('click',exportRoster);
+	if( document.getElementsByClassName('roster-filters').length == 0 || document.getElementsByClassName('roster-filters')[0] == null){
+		numberOfCheck = 0
+		return
+	}
+	console.log("Adding button to UI");
+	root = document.getElementsByClassName('roster-filters')[0];
+	root.childNodes[0].appendChild(x);
+}
 
-root = document.getElementsByClassName('roster-filters')[0];
-root.childNodes[0].appendChild(x);
+
+var rebuildUIInterval = null;
+var numberOfCheck = 0;
+
+function rebuildUI(){
+  console.log("Check UI");
+	if ( jQuery('#x-msftools-roster').length == 0 ){
+			addRosterButton();
+			console.log("We are rebuilding UI");
+      numberOfCheck = 0;
+	}else{
+		numberOfCheck++;
+		console.log("UI is okay "+numberOfCheck+"/10");
+		if( numberOfCheck == 10 ) {
+			console.log("UI is built stopping the timer");
+		  clearInterval(rebuildUIInterval);
+		}
+	}
+}
+
+
+jQuery(document).ready(function (){
+	/*
+	var scripts = [
+		"//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",
+		"https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"
+	]
+	*/
+	var scripts = [
+		"https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"
+	];
+
+	injectLibraries(scripts);
+	rebuildUIInterval = setInterval( rebuildUI, 1000);
+});
