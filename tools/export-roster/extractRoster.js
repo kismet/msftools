@@ -160,9 +160,10 @@ function exportRosterAsCSV() {
 	csv += "iso_class,iso_level,gear_tl,gear_cl,gear_bl,gear_br,gear_cr,gear_tr\n";
 	toons.map( function(c) {
 		var str = '';
-		str += c.name+","+c.power+","+c.level+","+c.gear+","+c.skills.join(",")+","+c.iso.class+","
-		if(c.iso.color == "green") str+= "1."+c.iso.level+",";
-		if(c.iso.color == "blue") str+= "2."+c.iso.level+",";
+		str += c.name+","+c.power+","+c.level+","+c.gear+","+c.skills.join(",")+",";
+		if(c.iso == null) str+="none,0,";
+		else if(c.iso.color == "green") str+= c.iso.class+",1."+c.iso.level+",";
+		else if(c.iso.color == "blue") str+= c.iso.class+",2."+c.iso.level+",";
 		str += c.slots.join(",");
 		console.log(str);
 
